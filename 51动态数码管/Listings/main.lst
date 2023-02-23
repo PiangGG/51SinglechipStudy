@@ -1,0 +1,275 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              02/24/2023 00:05:54 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Program Files\KeilC51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.
+                    -\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "reg52.h"
+   2          
+   3          typedef unsigned char u8;
+   4          typedef unsigned int u16;
+   5          
+   6          #define SMG_A_DP_PORT P0;
+   7          
+   8          sbit LSA =P2^2;
+   9          sbit LSB =P2^3;
+  10          sbit LSC =P2^4;
+  11          sbit BEEP = P2^5;
+  12          
+  13          u8 gsmg_code[] = {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+  14                            0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+  15          
+  16          void Delay_10us(u16 ten_us);
+  17          void Smg_Display(u8 c);
+  18                            
+  19          void Smg_Display(u8 c)
+  20          {
+  21   1        u8 i= 0;
+  22   1        
+  23   1        switch(c)
+  24   1        {
+  25   2          case 0:
+  26   2            for(i=0;i<8;i++)
+  27   2            {
+  28   3              switch(i)
+  29   3              {
+  30   4                case 0:
+  31   4                  LSC=1;
+  32   4                  LSB=1;
+  33   4                  LSA=1;
+  34   4                  P0 = gsmg_code[7];
+  35   4                  break;
+  36   4                case 1:
+  37   4                  LSC=1;
+  38   4                  LSB=1;
+  39   4                  LSA=0;
+  40   4                  P0 = gsmg_code[0];
+  41   4                  break;
+  42   4                case 2:
+  43   4                  LSC=1;
+  44   4                  LSB=0;
+  45   4                  LSA=1;
+  46   4                  P0 = gsmg_code[7];
+  47   4                  break;
+  48   4                case 3:
+  49   4                  LSC=1;
+  50   4                  LSB=0;
+  51   4                  LSA=0;
+  52   4                  P0 = gsmg_code[2];
+  53   4                  break;
+  54   4                case 4:
+C51 COMPILER V9.60.7.0   MAIN                                                              02/24/2023 00:05:54 PAGE 2   
+
+  55   4                  LSC=0;
+  56   4                  LSB=1;
+  57   4                  LSA=1;
+  58   4                  P0 = gsmg_code[2];
+  59   4                  break;
+  60   4                case 5:
+  61   4                  LSC=0;
+  62   4                  LSB=1;
+  63   4                  LSA=0;
+  64   4                  P0 = gsmg_code[3];
+  65   4                  break;
+  66   4                case 6:
+  67   4                  LSC=0;
+  68   4                  LSB=0;
+  69   4                  LSA=1;
+  70   4                  P0 = gsmg_code[9];
+  71   4                  break;
+  72   4                case 7:LSC=0;LSB=0;LSA=0;
+  73   4                  P0 = gsmg_code[7];
+  74   4                  break;
+  75   4                default:
+  76   4                  break;
+  77   4              }
+  78   3              Delay_10us(100);
+  79   3            }
+  80   2            break;
+  81   2          case 1:
+  82   2            for(i=0;i<8;i++)
+  83   2            {
+  84   3              switch(i)
+  85   3              {
+  86   4                case 0:
+  87   4                  LSC=1;
+  88   4                  LSB=1;
+  89   4                  LSA=1;
+  90   4                  P0 = gsmg_code[6];
+  91   4                  break;
+  92   4                case 1:
+  93   4                  LSC=1;
+  94   4                  LSB=1;
+  95   4                  LSA=0;
+  96   4                  P0 = gsmg_code[4];
+  97   4                  break;
+  98   4                case 2:
+  99   4                  LSC=1;
+ 100   4                  LSB=0;
+ 101   4                  LSA=1;
+ 102   4                  P0 = gsmg_code[5];
+ 103   4                  break;
+ 104   4                case 3:
+ 105   4                  LSC=1;
+ 106   4                  LSB=0;
+ 107   4                  LSA=0;
+ 108   4                  P0 = gsmg_code[8];
+ 109   4                  break;
+ 110   4                case 4:
+ 111   4                  LSC=0;
+ 112   4                  LSB=1;
+ 113   4                  LSA=1;
+ 114   4                  P0 = gsmg_code[3];
+ 115   4                  break;
+ 116   4                case 5:
+C51 COMPILER V9.60.7.0   MAIN                                                              02/24/2023 00:05:54 PAGE 3   
+
+ 117   4                  LSC=0;
+ 118   4                  LSB=1;
+ 119   4                  LSA=0;
+ 120   4                  P0 = gsmg_code[0];
+ 121   4                  break;
+ 122   4                case 6:
+ 123   4                  LSC=0;
+ 124   4                  LSB=0;
+ 125   4                  LSA=1;
+ 126   4                  P0 = gsmg_code[7];
+ 127   4                  break;
+ 128   4                case 7:LSC=0;LSB=0;LSA=0;
+ 129   4                  P0 = gsmg_code[9];
+ 130   4                  break;
+ 131   4                default:
+ 132   4                  break;
+ 133   4              }
+ 134   3              Delay_10us(100);
+ 135   3            }
+ 136   2            break;
+ 137   2            case 2:
+ 138   2            for(i=0;i<8;i++)
+ 139   2            {
+ 140   3              switch(i)
+ 141   3              {
+ 142   4                case 0:
+ 143   4                  LSC=1;
+ 144   4                  LSB=1;
+ 145   4                  LSA=1;
+ 146   4                  P0 = gsmg_code[5];
+ 147   4                  break;
+ 148   4                case 1:
+ 149   4                  LSC=1;
+ 150   4                  LSB=1;
+ 151   4                  LSA=0;
+ 152   4                  P0 = gsmg_code[2];
+ 153   4                  break;
+ 154   4                case 2:
+ 155   4                  LSC=1;
+ 156   4                  LSB=0;
+ 157   4                  LSA=1;
+ 158   4                  P0 = gsmg_code[0];
+ 159   4                  break;
+ 160   4                case 3:
+ 161   4                  LSC=1;
+ 162   4                  LSB=0;
+ 163   4                  LSA=0;
+ 164   4                  P0 = gsmg_code[1];
+ 165   4                  break;
+ 166   4                case 4:
+ 167   4                  LSC=0;
+ 168   4                  LSB=1;
+ 169   4                  LSA=1;
+ 170   4                  P0 = gsmg_code[3];
+ 171   4                  break;
+ 172   4                case 5:
+ 173   4                  LSC=0;
+ 174   4                  LSB=1;
+ 175   4                  LSA=0;
+ 176   4                  P0 = gsmg_code[1];
+ 177   4                  break;
+ 178   4                case 6:
+C51 COMPILER V9.60.7.0   MAIN                                                              02/24/2023 00:05:54 PAGE 4   
+
+ 179   4                  LSC=0;
+ 180   4                  LSB=0;
+ 181   4                  LSA=1;
+ 182   4                  P0 = gsmg_code[4];
+ 183   4                  break;
+ 184   4                case 7:LSC=0;LSB=0;LSA=0;
+ 185   4                  P0 = 0;
+ 186   4                  break;
+ 187   4                default:
+ 188   4                  break;
+ 189   4              }
+ 190   3              Delay_10us(100);
+ 191   3            }
+ 192   2            break;
+ 193   2        }
+ 194   1      }
+ 195          //
+ 196          void Delay_10us(u16 ten_us)
+ 197          {
+ 198   1        while(ten_us--);
+ 199   1      } 
+ 200          
+ 201          void main()
+ 202          {
+ 203   1        
+ 204   1        while(1)
+ 205   1        {
+ 206   2          int i = 0;
+ 207   2          int n1;
+ 208   2          int q1;
+ 209   2          LSC=1;
+ 210   2          LSB=1;
+ 211   2          LSA=1;
+ 212   2          for(i=9;i>=0;i--)
+ 213   2          {
+ 214   3            P0 = gsmg_code[i];
+ 215   3            n1 = 2000;
+ 216   3            while(n1--)
+ 217   3            {   
+ 218   4              BEEP = !BEEP;
+ 219   4              Delay_10us(10);
+ 220   4            }
+ 221   3            Delay_10us(50000);
+ 222   3          }
+ 223   2          P0 = 0x00;
+ 224   2          q1 = 200;
+ 225   2          while(q1--)
+ 226   2          {
+ 227   3            
+ 228   3            n1 = 10;
+ 229   3            while(n1--)
+ 230   3            {   
+ 231   4              BEEP = !BEEP;
+ 232   4              Delay_10us(20);
+ 233   4            }
+ 234   3            Delay_10us(200);
+ 235   3          }
+ 236   2          
+ 237   2          q1= 100;
+ 238   2          while(q1--)
+ 239   2          {
+ 240   3            Smg_Display(2);
+C51 COMPILER V9.60.7.0   MAIN                                                              02/24/2023 00:05:54 PAGE 5   
+
+ 241   3          }
+ 242   2        }
+ 243   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    615    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
